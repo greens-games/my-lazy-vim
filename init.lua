@@ -474,6 +474,14 @@ require('lazy').setup {
         -- But for many setups, the LSP (`tsserver`) will work just fine
         -- tsserver = {},
         --
+        zls = {
+          cmd = { '/home/matthewgreen/utils/zls/zig-out/bin/zls' },
+          settings = {
+            zls = {
+              zig_exe_path = '/home/matthewgreen/utils/zigup/zig-out/bin/zig',
+            },
+          },
+        },
 
         lua_ls = {
           -- cmd = {...},
@@ -734,7 +742,7 @@ require('lazy').setup {
   },
 
   {
-    'github/copilot.vim',
+    -- 'github/copilot.vim',
   },
 
   {
