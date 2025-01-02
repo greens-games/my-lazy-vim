@@ -65,8 +65,16 @@ vim.opt.cursorline = true
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 10
 
+--Tab width
+vim.opt['tabstop'] = 4
+vim.opt['shiftwidth'] = 4
+
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
+
+-- Don't overwrite when deleting
+vim.keymap.set({ 'n', 'v' }, 'x', '"_x')
+vim.keymap.set({ 'n', 'v' }, 'd', '"_d')
 
 -- Set highlight on search, but clear on pressing <Esc> in normal mode
 vim.opt.hlsearch = true
@@ -151,7 +159,7 @@ vim.opt.rtp:prepend(lazypath)
 -- NOTE: Here is where you install your plugins.
 require('lazy').setup {
   -- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
-  'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
+  --'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
 
   -- NOTE: Plugins can also be added by using a table,
   -- with the first argument being the link and the following
@@ -475,10 +483,10 @@ require('lazy').setup {
         -- tsserver = {},
         --
         zls = {
-          cmd = { '/home/matthewgreen/utils/zls/zig-out/bin/zls' },
+          cmd = { 'C:/Development/zls/zig-out/bin/zls' },
           settings = {
             zls = {
-              zig_exe_path = '/home/matthewgreen/utils/zigup/zig-out/bin/zig',
+              zig_exe_path = 'C:/Development/zigup/zig-out/bin/zig.exe',
             },
           },
         },
@@ -753,6 +761,10 @@ require('lazy').setup {
       'stevearc/dressing.nvim', -- optional for vim.ui.select
     },
     config = true,
+  },
+
+  {
+    'mfussenegger/nvim-dap',
   },
   -- The following two comments only work if you have downloaded the kickstart repo, not just copy pasted the
   -- init.lua. If you want these files, they are in the repository, so you can just download them and
