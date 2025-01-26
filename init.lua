@@ -427,7 +427,7 @@ require('lazy').setup {
 
           -- Opens a popup that displays documentation about the word under your cursor
           --  See `:help K` for why this keymap
-          map('K', vim.lsp.buf.hover, 'Hover Documentation')
+          map('gh', vim.lsp.buf.hover, 'Hover Documentation')
 
           -- WARN: This is not Goto Definition, this is Goto Declaration.
           --  For example, in C this would take you to the header
@@ -490,6 +490,8 @@ require('lazy').setup {
             },
           },
         },
+
+        ols = {},
 
         lua_ls = {
           -- cmd = {...},
@@ -554,12 +556,13 @@ require('lazy').setup {
     'stevearc/conform.nvim',
     opts = {
       notify_on_error = false,
-      format_on_save = {
+      --[[ format_on_save = {
         timeout_ms = 500,
         lsp_fallback = true,
-      },
+      }, ]]
       formatters_by_ft = {
         lua = { 'stylua' },
+        odin = { 'ols' },
         -- Conform can also run multiple formatters sequentially
         -- python = { "isort", "black" },
         --
@@ -668,13 +671,16 @@ require('lazy').setup {
     -- change the command in the config to whatever the name of that colorscheme is
     --
     -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`
-    --'folke/tokyonight.nvim',
-    'ellisonleao/gruvbox.nvim',
+    --[[ 'folke/tokyonight.nvim', ]]
+    'neanias/everforest-nvim',
+    --[[ 'dracula/vim', ]]
     lazy = false, -- make sure we load this during startup if it is your main colorscheme
     priority = 1000, -- make sure to load this before all the other start plugins
     config = function()
       -- Load the colorscheme here
-      vim.cmd.colorscheme 'gruvbox'
+      --[[ vim.cmd.colorscheme 'tokyonight' ]]
+      vim.cmd.colorscheme 'everforest'
+      --[[ vim.cmd.colorscheme 'dracula' ]]
 
       -- You can configure highlights by doing something like
       vim.cmd.hi 'Comment gui=none'
