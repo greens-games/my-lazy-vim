@@ -490,9 +490,6 @@ require('lazy').setup {
             },
           },
         },
-
-        ols = {},
-
         lua_ls = {
           -- cmd = {...},
           -- filetypes { ...},
@@ -672,14 +669,14 @@ require('lazy').setup {
     --
     -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`
     --[[ 'folke/tokyonight.nvim', ]]
-    'neanias/everforest-nvim',
+    'rose-pine/neovim',
     --[[ 'dracula/vim', ]]
     lazy = false, -- make sure we load this during startup if it is your main colorscheme
     priority = 1000, -- make sure to load this before all the other start plugins
     config = function()
       -- Load the colorscheme here
       --[[ vim.cmd.colorscheme 'tokyonight' ]]
-      vim.cmd.colorscheme 'everforest'
+      vim.cmd.colorscheme 'rose-pine'
       --[[ vim.cmd.colorscheme 'dracula' ]]
 
       -- You can configure highlights by doing something like
@@ -771,6 +768,10 @@ require('lazy').setup {
 
   {
     'mfussenegger/nvim-dap',
+  },
+  
+  {
+    'mg979/vim-visual-multi'
   },
   -- The following two comments only work if you have downloaded the kickstart repo, not just copy pasted the
   -- init.lua. If you want these files, they are in the repository, so you can just download them and
