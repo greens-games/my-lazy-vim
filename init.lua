@@ -363,6 +363,23 @@ require('lazy').setup {
         -- But for many setups, the LSP (`tsserver`) will work just fine
         -- tsserver = {},
         --
+        --
+        --[[ rust_analyzer = {
+          imports = {
+            granularity = {
+              group = "module",
+            },
+            prefix = "self",
+          },
+          cargo = {
+            buildScripts = {
+              enable = true,
+            },
+          },
+          procMacro = {
+            enable = true
+          },
+        }, ]]
         zls = {
           cmd = { 'C:/Development/zls/zig-out/bin/zls' },
           settings = {
@@ -566,6 +583,8 @@ require('lazy').setup {
       --[[ vim.cmd.colorscheme 'gruvbox-baby' ]]
       vim.cmd.colorscheme 'solarized-osaka'
 
+      vim.api.nvim_set_hl(0, "Normal", {bg = "none"})
+      vim.api.nvim_set_hl(0, "NormalFloat", {bg = "none"})
       -- You can configure highlights by doing something like
       vim.cmd.hi 'Comment gui=none'
     end,
@@ -638,6 +657,13 @@ require('lazy').setup {
   {
     'ThePrimeagen/harpoon',
   },
+  {
+    "mbbill/undotree",
+
+    config = function()  
+        vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
+    end
+  }
 
   -- The following two comments only work if you have downloaded the kickstart repo, not just copy pasted the
   -- init.lua. If you want these files, they are in the repository, so you can just download them and
