@@ -89,7 +89,7 @@ require('lazy').setup {
       require('which-key').setup()
 
       -- Document existing key chains
-      require('which-key').add {
+      --[[ require('which-key').add {
         { "<leader>c", group = "[C]ode" },
         { "<leader>c_", hidden = true },
         { "<leader>d", group = "[D]ocument" },
@@ -100,7 +100,7 @@ require('lazy').setup {
         { "<leader>s_", hidden = true },
         { "<leader>w", group = "[W]orkspace" },
         { "<leader>w_", hidden = true },
-      }
+      } ]]
     end,
   },
 
@@ -663,8 +663,17 @@ require('lazy').setup {
     config = function()  
         vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
     end
-  }
+  },
+  {
+    'MeanderingProgrammer/render-markdown.nvim',
+    dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.nvim' }, -- if you use the mini.nvim suite
+    -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.icons' }, -- if you use standalone mini plugins
+    -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
+    ---@module 'render-markdown'
+    ---@type render.md.UserConfig
+    opts = {},
 
+  }
   -- The following two comments only work if you have downloaded the kickstart repo, not just copy pasted the
   -- init.lua. If you want these files, they are in the repository, so you can just download them and
   -- put them in the right spots if you want.
