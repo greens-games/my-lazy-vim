@@ -46,7 +46,6 @@ require('lazy').setup {
   --  This is equivalent to:
   --    require('Comment').setup({})
 
-
   -- "gc" to comment visual regions/lines
   { 'numToStr/Comment.nvim', opts = {} },
 
@@ -572,7 +571,8 @@ require('lazy').setup {
     --[[ 'dracula/vim', ]]
     --[[ 'sainnhe/gruvbox-material', ]]
     --[[ 'luisiacc/gruvbox-baby', ]]
-    'craftzdog/solarized-osaka.nvim',
+    --[[ 'craftzdog/solarized-osaka.nvim', ]]
+    'rebelot/kanagawa.nvim',
     lazy = false, -- make sure we load this during startup if it is your main colorscheme
     priority = 1000, -- make sure to load this before all the other start plugins
     config = function()
@@ -580,9 +580,9 @@ require('lazy').setup {
       --[[ vim.cmd.colorscheme 'tokyonight' ]]
       --[[ vim.cmd.colorscheme 'rose-pine' ]]
       --[[ vim.cmd.colorscheme 'dracula' ]]
-      --[[ vim.cmd.colorscheme 'gruvbox-material' ]]
+      vim.cmd.colorscheme 'kanagawa'
       --[[ vim.cmd.colorscheme 'gruvbox-baby' ]]
-      vim.cmd.colorscheme 'solarized-osaka'
+      --[[ vim.cmd.colorscheme 'solarized-osaka' ]]
 
       vim.api.nvim_set_hl(0, "Normal", {bg = "none"})
       vim.api.nvim_set_hl(0, "NormalFloat", {bg = "none"})
@@ -631,11 +631,9 @@ require('lazy').setup {
     end,
   },
 
-
   { -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
-    dependencies = {'OXY2DEV/markview.nvim'},
     config = function()
       -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
 
@@ -667,11 +665,10 @@ require('lazy').setup {
         vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
     end
   },
-  --[[ {
+  {
     "OXY2DEV/markview.nvim",
-    dependencies = {'nvim-treesitter/nvim-treesitter'},
     lazy = false,
-  } ]]
+  }
   --[[ {
     'MeanderingProgrammer/render-markdown.nvim',
     dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.nvim' }, -- if you use the mini.nvim suite
@@ -681,7 +678,6 @@ require('lazy').setup {
     ---@type render.md.UserConfig
     opts = {},
   } ]]
-
 
   -- The following two comments only work if you have downloaded the kickstart repo, not just copy pasted the
   -- init.lua. If you want these files, they are in the repository, so you can just download them and
