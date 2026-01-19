@@ -114,3 +114,7 @@ vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right win
 vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' }) ]]
 vim.keymap.set('n', '<leader>l', '_yeofmt.println(\"<Esc>pvb<S-u>ea: \",<Esc>pa)<Esc>')
+vim.keymap.set('n', '<leader>or', ':!odin run .<CR>')
+vim.keymap.set('n', '<leader>ord', ':!odin run . -debug<CR>')
+vim.keymap.set('n', '<leader>ob', ':!odin build . -debug<CR>')
+vim.keymap.set('n', '<leader>tc', '_f:wy$/Table of Contents<CR>o<Esc>p_i<Tab><Esc><C-o><Esc><Esc>')
