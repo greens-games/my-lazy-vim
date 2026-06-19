@@ -14,6 +14,18 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
 })
 
+vim.api.nvim_create_autocmd("VimEnter", {
+callback = function()
+io.stdout:write("\027[>1u")
+end,
+})
+
+vim.api.nvim_create_autocmd("VimLeavePre", {
+callback = function()
+io.stdout:write("\027[<1u")
+end,
+})
+
 -- [[ Install `lazy.nvim` plugin manager ]]
 --    See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
@@ -570,19 +582,20 @@ require('lazy').setup {
     --[[ 'folke/tokyonight.nvim', ]]
     --[[ 'rose-pine/neovim', ]]
     --[[ 'dracula/vim', ]]
+		--[[ 'loctvl842/monokai-pro.nvim', ]]
     --[[ 'sainnhe/gruvbox-material', ]]
-    --[[ 'luisiacc/gruvbox-baby', ]]
+    'luisiacc/gruvbox-baby',
     --[[ 'craftzdog/solarized-osaka.nvim', ]]
-    'rebelot/kanagawa.nvim',
+    --[[ 'rebelot/kanagawa.nvim', ]]
     lazy = false, -- make sure we load this during startup if it is your main colorscheme
     priority = 1000, -- make sure to load this before all the other start plugins
     config = function()
       -- Load the colorscheme here
       --[[ vim.cmd.colorscheme 'tokyonight' ]]
       --[[ vim.cmd.colorscheme 'rose-pine' ]]
-      --[[ vim.cmd.colorscheme 'dracula' ]]
-      vim.cmd.colorscheme 'kanagawa-dragon'
-      --[[ vim.cmd.colorscheme 'gruvbox-baby' ]]
+      --[[ vim.cmd.colorscheme 'monokai-pro' ]]
+      --[[ vim.cmd.colorscheme 'kanagawa-dragon' ]]
+      vim.cmd.colorscheme 'gruvbox-baby'
       --[[ vim.cmd.colorscheme 'solarized-osaka' ]]
 
       vim.api.nvim_set_hl(0, "Normal", {bg = "none"})
@@ -613,6 +626,21 @@ require('lazy').setup {
       -- - sr)'  - [S]urround [R]eplace [)] [']
       require('mini.surround').setup()
 
+			require('mini.move').setup({
+				mappings = {
+					-- Move visual selection in Visual mode. Defaults are Alt (Meta) + hjkl.
+					left = '<C-h>',
+					right = '<C-l>',
+					down = '<C-j>',
+					up = '<C-k>',
+
+					-- Move current line in Normal mode
+					line_left = '<C-h>',
+					line_right = '<C-l>',
+					line_down = '<C-j>',
+					line_up = '<C-k>',
+				}
+			})
       -- Simple and easy statusline.
       --  You could remove this setup call if you don't like it,
       --  and try some other statusline plugin
@@ -666,6 +694,10 @@ require('lazy').setup {
         vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
     end
   },
+  {
+    "sphamba/smear-cursor.nvim",
+    opts = {},
+  },
 {
     "mfussenegger/nvim-dap",
     event = "VeryLazy",
@@ -714,20 +746,49 @@ require('lazy').setup {
 						miDebuggerPath = "/usr/bin/lldb",
 						stopAtEntry = false,
 					}
-					--[[ {
-						name = "Select and attach to process",
+			},
+
+			rust = {
+					{
+						name = "Debug lldb launch",
 						type = "codelldb",
-						request = "attach",
+						request = "launch",
 						program = function()
-							return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+							return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
 						end,
-						pid = function()
-							local name = vim.fn.input('Executable name (filter): ')
-							return require("dap.utils").pick_process({ filter = name })
+						cwd = "${workspaceFolder}",
+						miDebuggerPath = "/usr/bin/lldb",
+						stopAtEntry = false,
+					}
+			},
+
+			cpp = {
+					{
+						name = "Debug lldb launch",
+						type = "codelldb",
+						request = "launch",
+						program = function()
+							return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
 						end,
-						cwd = '${workspaceFolder}'
-					}, ]]
-			}
+						cwd = "${workspaceFolder}",
+						miDebuggerPath = "/usr/bin/lldb",
+						stopAtEntry = false,
+					}
+			},
+
+			c = {
+					{
+						name = "Debug lldb launch",
+						type = "codelldb",
+						request = "launch",
+						program = function()
+							return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+						end,
+						cwd = "${workspaceFolder}",
+						miDebuggerPath = "/usr/bin/lldb",
+						stopAtEntry = false,
+					}
+			},
 			}
 
 			-- Dap UI

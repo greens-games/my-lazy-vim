@@ -30,9 +30,6 @@ vim.opt.clipboard = 'unnamedplus'
 -- Enable break indent
 vim.opt.breakindent = true
 vim.g.python_indent = true
-vim.g.rust_recommended_style = false
---let g:rust_recommended_style = v:false
-
 
 -- Save undo history
 vim.opt.undofile = true
@@ -69,9 +66,8 @@ vim.opt.cursorline = true
 vim.opt.scrolloff = 10
 
 --Tab width
-vim.opt['tabstop'] = 2
-vim.opt['shiftwidth'] = 2
-vim.opt['expandtab'] = true
+vim.opt['tabstop'] = 4
+vim.opt['shiftwidth'] = 4
 
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
@@ -94,8 +90,6 @@ vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
-vim.keymap.set('n', '<leader>pv', vim.cmd.Ex)
-
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
@@ -110,6 +104,7 @@ vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' }
 -- vim.keymap.set('n', '<right>', '<cmd>echo "Use l to move!!"<CR>')
 -- vim.keymap.set('n', '<up>', '<cmd>echo "Use k to move!!"<CR>')
 -- vim.keymap.set('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
+vim.keymap.set('n', '<leader>pv', vim.cmd.Ex)
 -- Keybinds to make split navigation easier.
 --  Use CTRL+<hjkl> to switch between windows
 --
@@ -119,13 +114,8 @@ vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right win
 vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' }) ]]
 vim.keymap.set('n', '<leader>l', '_yeofmt.println(\"<Esc>pvb<S-u>ea: \",<Esc>pa)<Esc>')
-vim.keymap.set('n', '<C-r>', ':!odin run .<CR>')
-vim.keymap.set('n', '<M-d>', ':!odin build . -debug<CR>')
-vim.keymap.set('n', '<C-b>', ':!odin build build/web -out:main.wasm -target:js_wasm32;mv main.wasm bin/web/<CR>')
+vim.keymap.set('n', '<leader>or', ':!odin run .<CR>')
 vim.keymap.set('n', '<leader>ord', ':!odin run . -debug<CR>')
+vim.keymap.set('n', '<leader>ob', ':!odin build . -debug<CR>')
 vim.keymap.set('n', '<leader>tc', '_f:wy$/Table of Contents<CR>o<Esc>p_i<Tab><Esc><C-o><Esc><Esc>')
 
-vim.keymap.set('n', '<C-y>', vim.cmd.redo)
-
---[[ vim.keymap.set('n', '<C-k>', ':m -2<CR>')
-vim.keymap.set('n', '<C-j>', ':m +1<CR>') ]]
